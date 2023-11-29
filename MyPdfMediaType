@@ -1,0 +1,5 @@
+    public class MyPdfMediaType : MediaData
+    {
+        [JsonIgnore]
+        public override Blob BinaryData { get; set; }
+    }
