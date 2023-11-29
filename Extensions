@@ -1,0 +1,24 @@
+        private static bool IsFileSizeLimitReached(IBinaryStorable binaryContent)
+        {
+            // Note: 37 MB max. size refers to the base64 encoded file size .
+            const int limitKb = 37000;
+
+            try
+            {
+                var blobByte = (binaryContent.BinaryData as AzureBlob)?.ReadAllBytes() ??
+                               (binaryContent.BinaryData as FileBlob)?.ReadAllBytes();
+
+                if (blobByte == null)
+                    return false;
+
+                double fileSize = blobByte.Length;
+
+                var isLimitReached = (int)(fileSize / 1024) >= limitKb;
+
+                return isLimitReached;
+            }
+            catch
+            {
+                return false;
+            }
+        }
