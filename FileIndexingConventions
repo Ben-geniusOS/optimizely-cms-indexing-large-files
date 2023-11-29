@@ -1,0 +1,15 @@
+    [InitializableModule]
+    [ModuleDependency(typeof(IndexingModule))]
+    public class FileIndexingConventions : IInitializableModule
+    {
+        public void Initialize(InitializationEngine context)
+        {
+            ContentIndexer.Instance.MediaBatchSize = 3;     // Default is 5
+            ContentIndexer.Instance.ContentBatchSize = 50;  // Default is 100
+        }
+
+        public void Uninitialize(InitializationEngine context)
+        {
+            throw new NotImplementedException();
+        }
+    }
